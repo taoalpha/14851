@@ -17,18 +17,10 @@ def helper(route, time, begin, end):
             endIndex = stopLists.index(end)
             return stopLists[beginIndex : endIndex+1]
 
-def get_stop_list(route1, time1, begin, end, route2 = None, stop2=None, time2 = None, route3 = None, stop3=None, time3 = None):
-    result = []
+def get_stop_list(route1, time1, stop1, end1, route2 = None, time2 = None, stop2 = None, end2 = None):
+    result = helper(route1, time1, stop1, end1)
     if stop2 != None:
-        print route1,time1,begin,stop2
-        result += helper(route1, time1, begin, stop2)
-        if stop3 != None:
-            result += helper(route2, time2, stop2, stop3)
-            result += helper(route3, time3, stop3, end)
-        else:
-            result += helper(route2, time2, stop2, end)
-    else:
-        result = result + helper(route1, time1, begin, end)
+        result += helper(route2, time2, stop2, end2)
     return result
 
-# print route_stop_list("74", "7:30AM", "Shops at Ithaca Mall @ Sears", "Groton Express Mart")
+# print get_stop_list("92", "1:28PM", "East Hill Plaza", "Schwartz Performing Arts", "30", "1:50PM", "College @ Dryden", "Shops at Ithaca Mall @ Sears")
