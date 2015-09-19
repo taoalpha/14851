@@ -1,8 +1,9 @@
 import json
 import time
+import getBusStopGeoCode
 
 routeStopMap = {}
-with open('stop_lists.json', 'r') as sl:
+with open('stop_lists_with_time.json', 'r') as sl:
     routeStopMap = json.load(sl)
 
 dataset = {}
@@ -16,38 +17,60 @@ def compare_time(time1, time2):
 
 def helper(route, begin, end, beginTime, endTime, day):
     ifEndExists = True
+    ifBeginExists = True
+    beginIndex = 0
+    endIndex = 0
+    result = []
+
     for dic in dataset:
-        if route == str(dic["Route"]) and begin == dic["Stop"] and beginTime == dic["Time"] and day == dic["Day"]:
-            key = str(route) + "_" + str(dic["RouteInstance"]) + "_" + dic["Day"]
-            print key
+        if route == str(dic["Route"]) and begin == dic["Stop"] and beginTime == dic["Time"]:
+            key = str(route) + "_" + str(dic["RouteInstance"])
             stopList = routeStopMap[key]
+
             stopNameList = []
             stopTimeList = []
+
             for stop in stopList:
-                stopNameList.append(stop.split("?")[0])
-                stopTimeList.append(stop.split("?")[1])
-            beginIndex = stopNameList.index(begin)
+                stopNameList.append(stop.split(",")[0])
+                stopTimeList.append(stop.split(",")[1])
+
+            if begin in stopNameList:
+                beginIndex = stopNameList.index(begin)
+            else:
+                ifBeginExists = False
+                for index, time in enumerate(stopTimeList):
+                    if compare_time(time, beginTime):
+                        beginIndex = index
+                        break
+
             if end in stopNameList:
                 endIndex = stopList.index(end)
             else:
                 ifEndExists = False
-                endIndex = len(stopTimeList) - 1
                 for index, time in enumerate(reversed(stopTimeList)):
                     if compare_time(endTime, time):
-                        endIndex -= index
-                        break;
+                        endIndex = len(stopTimeList) - 1 - index
+                        break
 
-            return (stopList[beginIndex : endIndex+1], ifEndExists)
+            result = stopNameList[beginIndex : endIndex+1]
+            if ifBeginExists:
+                result.insert(0, begin)
+            if ifEndExists:
+                result.append(end)
+            return result
 
 def get_stop_list(route1, stop1Name, stop1Time, end1Name, end1Time, day1, route2 = None, stop2Name = None, stop2Time = None, end2Name = None, end2Time = None, day2 = None):
-    result, ifEndExists = helper(route1, stop1Name, end1Name, stop1Time, end1Time, day1)
-    if not ifEndExists:
-        result.append(end1Name)
-    if stop2Name != None:
-        routingList, ifEndExists = helper(route2, stop2Name, end2Name, stop2Time, end2Time, day2)
-        result += routingList
-        if not ifEndExists:
-            result.append(end2Name)
-    return result
 
-# print get_stop_list("92", "East Hill Plaza", "3:28PM", "Sage Hall", "3:39PM", "Saturday")
+    result = helper(route1, stop1Name, end1Name, stop1Time, end1Time, day1)
+
+    if stop2Name != None:
+        result += helper(route2, stop2Name, end2Name, stop2Time, end2Time, day2)
+
+    geoResult = []
+    for stop in result:
+        print stop
+        geoResult += getBusStopGeoCode.getBusStopGeoCode(stop)
+
+    return geoResult
+
+print get_stop_list("92", "Hasbrouck Apts.", "3:00PM", "Sage Hall", "3:16PM", "Saturday")
