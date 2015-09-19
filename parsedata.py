@@ -7,7 +7,7 @@ sys.setdefaultencoding("utf-8")
 
 dataset = {}
 
-with open("stop-schedules.json","r") as fl:
+with open("api/stop-schedules.json","r") as fl:
     dataset = json.load(fl)
 
 # output all routes for stops
