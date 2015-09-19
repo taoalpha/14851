@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Eventually by HTML5 UP</title>
+		<title>Big Red Transit</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
@@ -16,39 +16,114 @@
 	</head>
 	<body>
 
-		<!-- Header -->
-			<header id="header">
-				<h1>Big Red Transit</h1>
-			</header>
+    <div id="homepage">
+		  <!-- Header -->
+	    <header id="header">
+		    <h1>Big Red Transit</h1>
+	    </header>
 
-		<!-- Signup Form -->
-			<form id="signup-form" method="post" action="#">
-				<input type="text" name="start" id="start" placeholder="Your current location" />
-				<input type="text" name="destination" id="destination" placeholder="Enter your destination" />
+		  <!-- Signup Form -->
+		  <form id="signup-form" method="post" action="#">
+		    <input type="text" name="start" id="start" placeholder="Your current location" />
+		  	<input type="text" name="destination" id="destination" placeholder="Enter your destination" />
         <input type="submit" value="Go">
-			</form>
+		  </form>
       <div id="type-selector" class="controls" style="display:none;">
         <input type="radio" name="type" id="changetype-all" checked="checked">
         <label for="changetype-all">All</label>
       </div>
 
-		<!-- Footer -->
-			<footer id="footer">
-				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
-					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
-				</ul>
-				<ul class="copyright">
+		  <!-- Footer -->
+		  <footer id="footer">
+		    <ul class="icons">
+		  	  <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+		  	  <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+		  	  <li><a href="#" class="icon fa-github"><span class="label">GitHub</span></a></li>
+		  	  <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+		    </ul>
+		  	<ul class="copyright">
           <li>&copy; 14851 @ BigRedHacks.</li>
         </ul>
-			</footer>
+		  </footer>
+    </div>
+    <div id="searchresult">
+      <div id="map"></div>
+      <div id="result_cards"></div>
+    </div>
+	<!-- Scripts -->
+	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+	<script src="assets/js/main.js"></script>
+  <script>
+    //var myLatlng = new google.maps.LatLng(-34.397, 150.644);
+    //var mapOptions = {
+    //    zoom: 8,
+    //      center: myLatlng,
+    //        mapTypeId: google.maps.MapTypeId.SATELLITE
+    //};
+    //var map = new google.maps.Map(document.getElementById("map"),
+    //    mapOptions);
 
-		<!-- Scripts -->
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
-      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxmQRLElfGflge_d4nngu8PzgwC3DQaA&signed_in=true&libraries=places&callback=initMap"></script>
-
-	</body>
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 13,
+        center: {lat: 42.4412, lng: -76.48985},
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+      });
+    
+      var flightPlanCoordinates = [
+        {lat: 42.456261, lng:-76.471623 },
+        {lat: 42.447484, lng:-76.482116 },
+        {lat: 42.447467, lng:-76.467641 },
+        //{lat: , lng: },
+        //{lat: , lng: },
+        //{lat: , lng: },
+        //{lat: , lng: },
+        //{lat: , lng: },
+        //{lat: , lng: },
+        //{lat: , lng: },
+        {lat: 42.4612, lng: -76.49985},
+        {lat: 42.43985, lng: -76.499133}
+      ];
+      var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+    
+      flightPath.setMap(map);
+    }
+    // This example displays an address form, using the autocomplete feature
+    // of the Google Places API to help users fill in the information.
+    
+    //var placeSearch;
+    
+    //function initAutocomplete() {
+    //  // Create the autocomplete object, restricting the search to geographical
+    //  // location types.
+    //  startLocation = new google.maps.places.Autocomplete((document.getElementById('start')),
+    //      {types: ['geocode']});
+    //
+    //  endLocation = new google.maps.places.Autocomplete((document.getElementById('destination')),
+    //      {types: ['geocode']});
+    //
+    //  startLocation.addListener('place_changed', getStart);
+    //  endLocation.addListener('place_changed', getEnd);
+    //}
+    //function getStart(){
+    //    var place = startLocation.getPlace();
+    //    console.log(place);
+    //}
+    //function getEnd(){
+    //    var place = endLocation.getPlace();
+    //    console.log(place);
+    //}
+    function main(){
+      //initAutocomplete()
+      initMap()
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxmQRLElfGflge_d4nngu8PzgwC3DQaA&signed_in=true&libraries=places&callback=main" async defer></script>
+  </body>
 </html>
