@@ -1,13 +1,18 @@
 import json
 
+busStopLocationDictionary = {}
+
 def getBusStopGeoCode(busStopName):
-    stopLocations = loadBusStopLocations
-    return stopLocations(busStopName)
+    if len(busStopLocationDictionary) == 0 :
+        loadBusStopLocations()
+    return busStopLocationDictionary[busStopName]
+
 
 def loadBusStopLocations():
+    busStopLocationJson = []
     locations = {}
     with open("busStopLocations.json","r") as f:
-        dataset = json.load(f)
-    for data in dataset:
-        locations[data["Name"]] = (data["Latitude"], data["Longitude"])
+        busStopLocationJson = json.load(f)
+    for data in busStopLocationJson:
+        busStopLocationDictionary[data["Name"]] = (data["Latitude"], data["Longitude"])
     return locations
