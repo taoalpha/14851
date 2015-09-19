@@ -67,7 +67,7 @@
 		-ms-overflow-style: scrollbar;
 	}
 
-	@media screen and (max-width: 640px) {
+	@media screen and (max-width: 480px) {
 
 		html, body {
 			min-width: 320px;
@@ -159,7 +159,7 @@
 
 				@media screen and (max-width: 1280px) {
 
-          #bg div.visible {
+					#bg div.visible {
 						-moz-animation: bg 29.25s linear infinite;
 						-webkit-animation: bg 29.25s linear infinite;
 						-ms-animation: bg 29.25s linear infinite;
@@ -800,7 +800,7 @@
 			opacity: 0.5;
 		}
 
-		@media screen and (max-width: 640px) {
+		@media screen and (max-width: 480px) {
 
 			input[type="submit"],
 			input[type="reset"],
@@ -826,7 +826,7 @@
 		}
 	}
 
-	@media screen and (max-width: 640px) {
+	@media screen and (max-width: 480px) {
 
 		#header {
 			margin: 4em 0 1em 0;
@@ -852,7 +852,7 @@
 			margin: 0 0 0 0;
 		}
 
-		@media screen and (max-width: 640px) {
+		@media screen and (max-width: 480px) {
 
 			#signup-form {
 				-moz-flex-direction: column;
@@ -973,7 +973,7 @@
   width: 50px;
   height:50px;
   margin: 10px;
-  padding: 1px 7px;
+  padding: 4px 5px;
 }
 #result_cards .cards span.time{
   font-size:0.9em;
@@ -981,8 +981,8 @@
   font-style:italic;
   display:block;
   position: relative;
-  top: 14px;
-  left: 5px;
+  top: 16px;
+  left: 10px;
 }
 #result_cards .cards span.time strong{
   color:black;
@@ -992,8 +992,8 @@
   color:#373737;
   font-style:normal;
   position: relative;
-  top: 6px;
-  left: 5px;
+  top: 10px;
+  left: 10px;
 }
 #result_cards .cards span.icon{
   float: left;
@@ -1031,19 +1031,4 @@
   position: absolute;
   top: 28px;
   right: 10px;
-}
-@media screen and (min-width:760px){
-  html{
-    zoom: 1.5;
-  }
-}
-@media screen and (min-width:1080px){
-  html{
-    zoom: 2;
-  }
-}
-@media screen and (min-width:1680px){
-  html{
-    zoom: 1.8;
-  }
 }

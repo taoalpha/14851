@@ -11,7 +11,8 @@ with open('route-schedules.json', 'r') as rs:
 def helper(route, time, begin, end):
     for dic in dataset:
         if route == str(dic["Route"]) and begin == dic["Stop"] and time == dic["Time"]:
-            key = str(route) + "_" + str(dic["RouteInstance"]) + "_" + dic["Day"] + "_" + dic["Direction"]
+            key = str(route) + "_" + str(dic["RouteInstance"]) + "_" + dic["Day"]
+            print key
             stopLists = routeStopMap[key]
             beginIndex = stopLists.index(begin)
             endIndex = stopLists.index(end)
@@ -23,4 +24,4 @@ def get_stop_list(route1, time1, stop1, end1, route2 = None, time2 = None, stop2
         result += helper(route2, time2, stop2, end2)
     return result
 
-# print get_stop_list("92", "1:28PM", "East Hill Plaza", "Schwartz Performing Arts", "30", "1:50PM", "College @ Dryden", "Shops at Ithaca Mall @ Sears")
+# print get_stop_list("92", "3:28PM", "East Hill Plaza", "Sage Hall", "75", "3:55PM", "Uris Hall", "Shops at Ithaca Mall @ Sears")
