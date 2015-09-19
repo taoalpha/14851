@@ -81,15 +81,6 @@
 		width: 100%;
 	}
 
-		@media screen and (max-height: 640px) {
-
-			html, body {
-				height: auto;
-				min-height: 100%;
-			}
-
-		}
-
 	body {
 		display: -moz-flex;
 		display: -webkit-flex;
@@ -103,7 +94,6 @@
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
 		justify-content: center;
-		padding: 6em 4em 4em 4em;
 	}
 
 		body > * {
@@ -120,30 +110,6 @@
 			-webkit-transition: none !important;
 			-ms-transition: none !important;
 			transition: none !important;
-		}
-
-		@media screen and (max-width: 1680px) {
-
-			body {
-				padding: 6em 3.5em 3.5em 3.5em;
-			}
-
-		}
-
-		@media screen and (max-width: 736px) {
-
-			body {
-				padding: 5em 2em 2em 2em;
-			}
-
-		}
-
-		@media screen and (max-width: 360px) {
-
-			body {
-				padding: 5em 1.25em 1.25em 1.25em;
-			}
-
 		}
 
 /* BG */
@@ -463,63 +429,15 @@
 			margin: 3em 0;
 		}
 
-/* Section/Article */
+/* For Homepage */
 
-	section.special, article.special {
-		text-align: center;
-	}
+  #homepage{
+    width:100%;
+    height:100%;
+    padding:5em 2em 3em 2em;
+  }
 
-	header p {
-		color: rgba(255, 255, 255, 0.5);
-		position: relative;
-		margin: 0 0 1.5em 0;
-	}
-
-	header h2 + p {
-		font-size: 1.25em;
-		margin-top: -1em;
-		line-height: 1.5em;
-	}
-
-	header h3 + p {
-		font-size: 1.1em;
-		margin-top: -0.8em;
-		line-height: 1.5em;
-	}
-
-	header h4 + p,
-	header h5 + p,
-	header h6 + p {
-		font-size: 0.9em;
-		margin-top: -0.6em;
-		line-height: 1.5em;
-	}
-
-	@media screen and (max-width: 980px) {
-
-		header br {
-			display: none;
-		}
-
-	}
-
-	@media screen and (max-width: 736px) {
-
-		header br {
-			display: inline;
-		}
-
-	}
-
-	@media screen and (max-width: 480px) {
-
-		header br {
-			display: none;
-		}
-
-	}
-
-/* Icon */
+	/* Icon */
 
 	.icon {
 		text-decoration: none;
@@ -527,7 +445,7 @@
 		position: relative;
 	}
 
-		.icon:before {
+	.icon:before {
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
 			font-family: FontAwesome;
@@ -792,125 +710,12 @@
 			background-color: rgba(255, 255, 255, 0.125);
 		}
 
-	.select-wrapper {
-		text-decoration: none;
-		display: block;
-		position: relative;
-	}
-
-		.select-wrapper:before {
-			-moz-osx-font-smoothing: grayscale;
-			-webkit-font-smoothing: antialiased;
-			font-family: FontAwesome;
-			font-style: normal;
-			font-weight: normal;
-			text-transform: none !important;
-		}
-
-		.select-wrapper:before {
-			color: rgba(255, 255, 255, 0.35);
-			content: '\f078';
-			display: block;
-			height: 2.75em;
-			line-height: 2.75em;
-			pointer-events: none;
-			position: absolute;
-			right: 0;
-			text-align: center;
-			top: 0;
-			width: 2.75em;
-		}
-
-		.select-wrapper select::-ms-expand {
-			display: none;
-		}
-
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
 	select {
 		height: 2.75em;
 	}
-
-	textarea {
-		padding: 0.75em 1em;
-	}
-
-	input[type="checkbox"],
-	input[type="radio"] {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		-ms-appearance: none;
-		appearance: none;
-		display: block;
-		float: left;
-		margin-right: -2em;
-		opacity: 0;
-		width: 1em;
-		z-index: -1;
-	}
-
-		input[type="checkbox"] + label,
-		input[type="radio"] + label {
-			text-decoration: none;
-			color: rgba(255, 255, 255, 0.75);
-			cursor: pointer;
-			display: inline-block;
-			font-size: 1em;
-			font-weight: 400;
-			padding-left: 2.4em;
-			padding-right: 0.75em;
-			position: relative;
-		}
-
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				-moz-osx-font-smoothing: grayscale;
-				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
-				font-style: normal;
-				font-weight: normal;
-				text-transform: none !important;
-			}
-
-			input[type="checkbox"] + label:before,
-			input[type="radio"] + label:before {
-				background: rgba(255, 255, 255, 0.125);
-				border-radius: 6px;
-				border: solid 2px rgba(255, 255, 255, 0.35);
-				content: '';
-				display: inline-block;
-				height: 1.65em;
-				left: 0;
-				line-height: 1.58125em;
-				position: absolute;
-				text-align: center;
-				top: 0;
-				width: 1.65em;
-			}
-
-		input[type="checkbox"]:checked + label:before,
-		input[type="radio"]:checked + label:before {
-			background: #1cb495;
-			border-color: #1cb495;
-			color: #ffffff;
-			content: '\f00c';
-		}
-
-		input[type="checkbox"]:focus + label:before,
-		input[type="radio"]:focus + label:before {
-			border-color: #1cb495;
-			box-shadow: 0 0 0 2px #1cb495;
-		}
-
-	input[type="checkbox"] + label:before {
-		border-radius: 6px;
-	}
-
-	input[type="radio"] + label:before {
-		border-radius: 100%;
-	}
-
 	::-webkit-input-placeholder {
 		color: rgba(255, 255, 255, 0.7) !important;
 		opacity: 1.0;
@@ -1012,32 +817,18 @@
 		font-size: 3.25em;
 		margin: 0 0 0.55em 0;
 	}
-
-	#header p {
-		font-size: 1.35em;
-		line-height: 1.65em;
-	}
-
-	#header a {
-		color: inherit;
-	}
-
+  
 	@media screen and (max-width: 736px) {
 
 		#header h1 {
 			font-size: 2em;
 		}
-
-		#header p {
-			font-size: 1em;
-		}
-
 	}
 
 	@media screen and (max-width: 480px) {
 
 		#header {
-			margin: 2em 0 1em 0;
+			margin: 4em 0 1em 0;
 		}
 
 	}
@@ -1099,9 +890,7 @@
 		-ms-transition: opacity 0.5s ease-in-out;
 		transition: opacity 0.5s ease-in-out;
     text-align:center;
-		bottom: 4em;
-		left: 4em;
-		position: absolute;
+    margin:30px 0 0 0;
 	}
 
 		#footer .icons {
@@ -1137,40 +926,22 @@
 			margin-bottom: 0;
 		}
 
-		@media screen and (max-width: 1680px) {
 
-			#footer {
-				bottom: 3.5em;
-				left: 3.5em;
-			}
 
-		}
-
-		@media screen and (max-width: 736px) {
-
-			#footer {
-				bottom: 2em;
-				left: 2em;
-			}
-
-		}
-
-		@media screen and (max-width: 360px) {
-
-			#footer {
-				bottom: 1.25em;
-				left: 1.25em;
-			}
-
-		}
-
-		@media screen and (max-height: 640px) {
-
-			#footer {
-				bottom: auto;
-				left: auto;
-				margin: 1em 0 0 0;
-				position: relative;
-			}
-
-		}
+#searchresult{
+  height:100%;
+  position:absolute;
+  top:100%;
+  width:100%;
+}
+#map{
+  height:100%;
+}
+#result_cards{
+  height:100px;
+  width:100%;
+  position:relative;
+  background-color:rgba(117, 203, 211, 0.5);
+  top:0px;
+  z-index:10000;
+}
