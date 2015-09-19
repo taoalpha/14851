@@ -1,0 +1,29 @@
+{
+  "stop-locations":
+  {
+    "Name":"xxx",
+    "Latitude":42,
+    "Longitude":-76
+  },
+  "route-location":
+  {
+    "coordinate":"all stops the route will pass"
+  },
+  "stop-shcedules":
+  {
+    "Stop":"name",
+    "Route":"route number",
+    "Day":"weekdays or weekends",
+    "Direction":"Outbound/Inbound/Southbound...",
+    "Time":"time"
+  },
+  "route-shcedules":
+  {
+    "Route":"route id",
+    "RouteInstance":"no idea about that..",
+    "Day":"weekdays",
+    "Direction":"Inbound...",
+    "Stop":"Demand and response zone",
+    "Time":"time/D?"
+  }
+}
