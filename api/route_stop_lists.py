@@ -5,7 +5,7 @@ routeStopMap = {}
 with open('route-schedules.json', 'r') as flr:
     dataset = json.load(flr)
     for dic in dataset:
-        key = str(dic["Route"]) + "_" + str(dic["RouteInstance"]) + "_" + dic["Day"] + "_" + dic["Direction"]
+        key = str(dic["Route"]) + "_" + str(dic["RouteInstance"]) + "_" + dic["Day"]
         if key in routeStopMap:
             routeStopMap[key].append(str(dic["Stop"]))
         else:
