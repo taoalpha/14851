@@ -17,9 +17,10 @@ def helper(route, time, begin, end):
             endIndex = stopLists.index(end)
             return stopLists[beginIndex : endIndex+1]
 
-def route_stop_list(route1, time1, begin, end, route2 = None, stop2=None, time2 = None, route3 = None, stop3=None, time3 = None):
+def get_stop_list(route1, time1, begin, end, route2 = None, stop2=None, time2 = None, route3 = None, stop3=None, time3 = None):
     result = []
     if stop2 != None:
+        print route1,time1,begin,stop2
         result += helper(route1, time1, begin, stop2)
         if stop3 != None:
             result += helper(route2, time2, stop2, stop3)
