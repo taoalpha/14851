@@ -5,12 +5,12 @@ import re
 import get_stop_list
 
 formdata = {
-"start":"3540",
-"end":"9028",
+"start":"3200",
+"end":"9037",
 "day":6,
-"starthours":1,
+"starthours":8,
 "startminutes":0,
-"startampm":1,
+"startampm":0,
 "customer":1,
 "sort":1,
 "transfers":1,
@@ -40,6 +40,8 @@ for i in allnames:
     route = allroutes[0]
     if len(alltimes) == 2:
         print "no transfer needed"
+        firstTransfer = 0
+        secondTransfer = 0
     elif len(alltimes) == 3:
         print "3 times"
         firstTransferTime = alltimes[1]
@@ -67,7 +69,7 @@ for i in allnames:
     print "Next bus will arrive at: "+startTime
     print "Trip time: "+estimatedTime
     print "\n\n"
-    print get_stop_list.get_stop_list(route,startTime.replace(' ',""),startDestination,endDestination,firstTransferRoute,firstTransfer,secondTransferTime.replace(' ',""))
+    #print get_stop_list.get_stop_list(route,startTime.replace(' ',""),startDestination,endDestination,firstTransferRoute,firstTransfer,secondTransferTime.replace(' ',""))
 
 
 #allidurl = "http://tcat.nextinsight.com/allstops.php"

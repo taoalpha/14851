@@ -18,16 +18,19 @@
 
 		<!-- Header -->
 			<header id="header">
-				<h1>Eventually</h1>
-				<p>A simple template for telling the world when you'll launch<br />
-				your next big thing. Brought to you by <a href="http://html5up.net">HTML5 UP</a>.</p>
+				<h1>Big Red Transit</h1>
 			</header>
 
 		<!-- Signup Form -->
 			<form id="signup-form" method="post" action="#">
-				<input type="email" name="email" id="email" placeholder="Email Address" />
-				<input type="submit" value="Sign Up" />
+				<input type="text" name="start" id="start" placeholder="Your current location" />
+				<input type="text" name="destination" id="destination" placeholder="Enter your destination" />
+        <input type="submit" value="Go">
 			</form>
+      <div id="type-selector" class="controls" style="display:none;">
+        <input type="radio" name="type" id="changetype-all" checked="checked">
+        <label for="changetype-all">All</label>
+      </div>
 
 		<!-- Footer -->
 			<footer id="footer">
@@ -38,13 +41,14 @@
 					<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 				</ul>
 				<ul class="copyright">
-					<li>&copy; Untitled.</li><li>Credits: <a href="http://html5up.net">HTML5 UP</a></li>
-				</ul>
+          <li>&copy; 14851 @ BigRedHacks.</li>
+        </ul>
 			</footer>
 
 		<!-- Scripts -->
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxmQRLElfGflge_d4nngu8PzgwC3DQaA&signed_in=true&libraries=places&callback=initMap"></script>
 
 	</body>
 </html>
