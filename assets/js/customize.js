@@ -48,16 +48,16 @@ this.options.drawTheMap = function(coords) {
       lat: 42.4412,
       lng: -76.48985
     },
-    mapTypeId: google.maps.MapTypeId.TERRAIN
+    mapTypeId: google.maps.MapTypeId.ROADMAP
   });
-  drawThePath = new google.maps.Polyline({
-    path: coords,
-    geodesic: true,
-    strokeColor: '#FF0000',
-    strokeOpacity: 1.0,
-    strokeWeight: 2
-  });
-  return drawThePath.setMap(this.map);
+  //drawThePath = new google.maps.Polyline({
+  //  path: coords,
+  //  geodesic: true,
+  //  strokeColor: '#FF0000',
+  //  strokeOpacity: 1.0,
+  //  strokeWeight: 2
+  //});
+  //return drawThePath.setMap(this.map);
 };
 
 
@@ -227,6 +227,8 @@ showMapData = function(ind){
 }
 
 $('#gosearch').on('click', function(e) {
+  e.preventDefault()
+  e.stopPropagation()
   window.options.search()
 });
 
