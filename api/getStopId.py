@@ -5,7 +5,10 @@ busStopIdDictionary = {}
 def getStopId(name):
     if len(busStopIdDictionary) == 0:
         loadBusStopIdDictionary()
-    return busStopIdDictionary[name]
+    if name in busStopIdDictionary:
+	return busStopIdDictionary[name]
+    else:
+    	return false
 
 
 def loadBusStopIdDictionary():
