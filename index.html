@@ -57,109 +57,12 @@
           <span class="right"></span>
         </div>
       </div>
+      <div id="backtohome"></div>
     </div>
 	<!-- Scripts -->
 	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 	<script src="assets/js/main.js"></script>
   <script src='assets/js/customize.js'></script>
-  <script>
-//    function initMap() {
-//      map = new google.maps.Map(document.getElementById('map'), {
-//        zoom: 13,
-//        center: {lat: 42.4412, lng: -76.48985},
-//        mapTypeId: google.maps.MapTypeId.TERRAIN
-//      });
-//    
-//      var flightPlanCoordinates = [
-//        {lat: 42.456261, lng:-76.471623 },
-//        {lat: 42.447484, lng:-76.482116 },
-//        {lat: 42.447467, lng:-76.467641 },
-//        //{lat: , lng: },
-//        //{lat: , lng: },
-//        //{lat: , lng: },
-//        //{lat: , lng: },
-//        //{lat: , lng: },
-//        //{lat: , lng: },
-//        //{lat: , lng: },
-//        {lat: 42.4612, lng: -76.49985},
-//        {lat: 42.43985, lng: -76.499133}
-//      ];
-//      var flightPath = new google.maps.Polyline({
-//        path: flightPlanCoordinates,
-//        geodesic: true,
-//        strokeColor: '#FF0000',
-//        strokeOpacity: 1.0,
-//        strokeWeight: 2
-//      });
-//    
-//      flightPath.setMap(map);
-//    }
-//    // This example displays an address form, using the autocomplete feature
-//    // of the Google Places API to help users fill in the information.
-//    
-//    var placeSearch;
-//    
-//    function initAutocomplete() {
-//      // Create the autocomplete object, restricting the search to geographical
-//      // location types.
-//      startLocation = new google.maps.places.Autocomplete((document.getElementById('start')),
-//          {types: ['geocode']});
-//    
-//      endLocation = new google.maps.places.Autocomplete((document.getElementById('destination')),
-//          {types: ['geocode']});
-//    
-//      startLocation.addListener('place_changed', getStart);
-//      endLocation.addListener('place_changed', getEnd);
-//    }
-//    function getStart(){
-//        var place = startLocation.getPlace();
-//        console.log(place);
-//    }
-//    function getEnd(){
-//        var place = endLocation.getPlace();
-//        console.log(place);
-//    }
-//    function main(){
-//      initAutocomplete()
-//      initMap()
-//      getLocation()
-//    }
-//    var getLocation = function() {
-//      if (navigator.geolocation) {
-//        return navigator.geolocation.getCurrentPosition(updatePos, showError);
-//      } else {
-//        return alert("Geolocation is not supported by this browser.");
-//      }
-//    };
-//
-//    var updatePos(position){
-//      var myLatLng = {}
-//      myLatLng.lat = position.coords.latitude;
-//      myLatLng.lng = position.coords.longitude;
-//      var marker = new google.maps.Marker({
-//        position: myLatLng,
-//        map: map,
-//        title: 'Here you are!'
-//      });
-//    }
-//    
-//    var showError = function(e) {
-//      switch (e.code) {
-//        case e.PERMISSION_DENIED:
-//          console.log("You denied the request for Geolocation.");
-//          return
-//        case e.POSITION_UNAVAILABLE:
-//          console.log("Location information is unavailable.");
-//          return
-//        case e.TIMEOUT:
-//          console.log("The request to get user location timed out.");
-//          return 
-//        case e.UNKNOWN_ERROR:
-//          console.log("Unknow error");
-//          return
-//      }
-//    }
-  </script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDyxmQRLElfGflge_d4nngu8PzgwC3DQaA&signed_in=true&libraries=places&callback=options.main" async defer></script>
   </body>
 </html>

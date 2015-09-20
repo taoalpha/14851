@@ -4,51 +4,65 @@ import bs4
 import re
 import get_stop_list
 import getStopId
-
+import datetime
+import time
 
 def getRouteInfo(startBusStop, endBusStop):
     form = getFormData(startBusStop, endBusStop)
     url ="http://tcat.nextinsight.com/index.php"
 
-    html = requests.post(url,data=formdata).text
+    html = requests.post(url,data=form).text
 
     soup = bs4.BeautifulSoup(html)
 
     allnames = soup.find_all('h4',class_="first")
     listsOfRoutes = []
+    listOfStartTimes = []
+    listOfEndTimes = []
+    listOfRouteNums = []
     for i in allnames:
-        option = i.get_text()
-        estimated = i.find_next("p").get_text()
+        # option = i.get_text()
+        # estimated = i.find_next("p").get_text()
         description = str(i.find_next("p").find_next("p"))
 
-        estimatedTime = re.search('.*: (.*)To.*',estimated).group(1)
+        # estimatedTime = re.search('.*: (.*)To.*',estimated).group(1)
 
         alltimes = re.findall('\d+:\d+ \w+',description)
         allstops = re.findall('stops/\d+">(.*?)\<\/a>',description)
         allroutes = re.findall('Route (\d+)',description)
-        route = allroutes[0]
-        if len(alltimes) == 2:
-            print "no transfer needed"
-            firstTransfer = 0
-            secondTransfer = 0
-        elif len(alltimes) == 3:
-            print "3 times"
-            firstTransferTime = alltimes[1]
-            firstTransfer = allstops[1]
-            firstTransferRoute = allroutes[1]
-        elif len(alltimes) == 4:
-            firstTransferTime = alltimes[1]
-            firstTransfer = allstops[1]
-            secondTransferTime = alltimes[2]
-            secondTransfer = allstops[2]
-            firstTransferRoute = allroutes[1]
-        startTime = alltimes[0]
-        endTime = alltimes[-1]
-        startDestination = allstops[0]
-        endDestination = allstops[-1]
-        route = get_stop_list.get_stop_list(route,startTime.replace(' ',""),startDestination,endDestination,firstTransferRoute,firstTransfer,secondTransferTime.replace(' ',""))
+
+        route1 = allroutes[0]
+        stop1name = allstops[0]
+        stop1time = alltimes[0]
+        end1name = allstops[1]
+        end1time = alltimes[1]
+        day1 = datetime.datetime.today()
+
+        route2 = None
+        stop2name = None
+        stop2time = None
+        end2name = None
+        end2time = None
+        day2 = None
+
+        if len(alltimes) == 4:
+            route = allroutes[1]
+            stop2name = allstops[2]
+            stop2time = alltimes[2]
+            end2name = allstops[3]
+            end2time = alltimes[3]
+            day2 = datetime.datetime.today()
+
+        route, directionList = get_stop_list.get_stop_list(route1, stop1name, stop1time, end1name, end1time, day1, route2, stop2name, stop2time, end2name, end2time, day2)
         listsOfRoutes.append(route)
-    return listsOfRoutes
+        listOfStartTimes.append(stop1time)
+        if len(alltimes) == 4:
+            listOfEndTimes.append(end2time)
+        else:
+            listOfEndTimes.append(end1time)
+        listOfRouteNums.append(allroutes)
+
+    return listsOfRoutes, listOfStartTimes, listOfEndTimes, listOfRouteNums, directionList
     # print "from:"+startDestination
     # print "to:"+endDestination
     # print "took route : " + route
@@ -70,7 +84,7 @@ def getDayRepNumber(day):
         'Wed': 3,
         'Thu': 4,
         'Fri': 5,
-        'Sat': 6        
+        'Sat': 6
     }.get(day)
 
 def getFormData(start, end):
