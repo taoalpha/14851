@@ -10,8 +10,6 @@ def get_info(startLocations, endLocations):
 
             routes, boardTimes, offTimes, routeNums, directionList =  tcatpost.getRouteInfo(startLocation["Name"], endLocation["Name"])
 
-            print routes, boardTimes, offTimes, routeNums, directionList 
-
             bus_info[key]["RouteNums"] = routeNums
             bus_info[key]["Routes"] = routes
 
@@ -27,4 +25,5 @@ def get_info(startLocations, endLocations):
 
     return bus_info
 
-#get_info("42.44444","-72.58888")
+get_info([{"Latitude": 42.4447409, "Name": "Carpenter Hall", "Longitude": -76.4841488
+}], [{"Latitude": 42.4365165, "Name": "East Hill Plaza", "Longitude": -76.46263259999999}])

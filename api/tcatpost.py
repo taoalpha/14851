@@ -15,17 +15,17 @@ def getRouteInfo(startBusStop, endBusStop):
 
     html = requests.post(url,data=form).text
 
-    soup = bs4.BeautifulSoup(html)
-
+    soup = bs4.BeautifulSoup(html,'html.parser')
+#    print re.findall('\d+:\d+ \w+',html)
     allnames = soup.find_all('h4',class_="first")
-    print len(allnames)
     listsOfRoutes = []
     listOfStartTimes = []
     listOfEndTimes = []
     listOfRouteNums = []
     directionList = []
-	
+
     for i in allnames:
+#        print i.get_text()
         # option = i.get_text()
         # estimated = i.find_next("p").get_text()
         description = str(i.find_next("p").find_next("p"))
@@ -95,8 +95,9 @@ def getDayRepNumber(day):
 
 def getFormData(start, end):
 
+    print start
     startID = getStopId.getStopId(start)
-    print startID
+    print "start stop id is :"+str(startID)
     endId = getStopId.getStopId(end)
 
     day = getDayRepNumber(time.strftime("%a"))
@@ -134,3 +135,4 @@ def getFormData(start, end):
 #    allids[stopname] = stopid
 
 #print allids
+    soup = bs4.BeautifulSoup(html)

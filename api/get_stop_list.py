@@ -3,7 +3,7 @@ import time
 import getBusStopGeoCode
 import os
 
-os.chdir("/var/www/bigredtransit/templates/api")
+# os.chdir("/var/www/bigredtransit/templates/api")
 
 routeStopMap = {}
 with open('stop_lists_with_time.json', 'r') as sl:
@@ -19,6 +19,8 @@ def compare_time(time1, time2):
     return fTime1 < fTime2
 
 def helper(route, begin, end, beginTime, endTime, day):
+    global dataset,routeStopMap
+
     ifEndExists = True
     ifBeginExists = True
     beginIndex = 0
@@ -26,13 +28,20 @@ def helper(route, begin, end, beginTime, endTime, day):
     result = []
 
     for dic in dataset:
-        if route == str(dic["Route"]) and begin == dic["Stop"] and beginTime == dic["Time"]:
+        if(dic['Stop'].find('Carpenter')>-1):
+            print dic['Stop']
+        if begin == dic['Stop']:
+            print dic['Stop']
+            #route == str(dic["Route"]) and begin == dic["Stop"]:
+            #and beginTime == dic["Time"]:
             key = str(route) + "_" + str(dic["RouteInstance"])
+            print key
             stopList = routeStopMap[key]
 
             stopNameList = []
             stopTimeList = []
 
+            print stopList
             for stop in stopList:
                 stopNameList.append(stop.split(",")[0])
                 stopTimeList.append(stop.split(",")[1])
@@ -60,13 +69,17 @@ def helper(route, begin, end, beginTime, endTime, day):
                 result.insert(0, begin)
             if ifEndExists:
                 result.append(end)
+            print result
+            print dic["Directions"]
             return result, dic["Directions"]
+
+    return
 
 
 def get_stop_list(route1, stop1Name, stop1Time, end1Name, end1Time, day1, route2 = None, stop2Name = None, stop2Time = None, end2Name = None, end2Time = None, day2 = None):
 
     directionList = []
-    result, d1  = helper(route1, stop1Name, end1Name, stop1Time, end1Time, day1)
+    result, d1 = helper(route1, stop1Name, end1Name, stop1Time, end1Time, day1)
     directionList.append(d1)
 
     if stop2Name != None:

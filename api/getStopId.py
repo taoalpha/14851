@@ -3,6 +3,8 @@ import json
 
 busStopIdDictionary = {}
 def getStopId(name):
+    global busStopIdDictionary
+
     if len(busStopIdDictionary) == 0:
         loadBusStopIdDictionary()
     if name in busStopIdDictionary:
@@ -12,6 +14,7 @@ def getStopId(name):
 
 
 def loadBusStopIdDictionary():
+    global busStopIdDictionary
     with open("allids.json","r") as f:
-        busStopLocationIDJson = json.load(f)
+        busStopIdDictionary = json.load(f)
 
