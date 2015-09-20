@@ -57,20 +57,24 @@ def helper(route, begin, end, beginTime, endTime, day):
                 result.insert(0, begin)
             if ifEndExists:
                 result.append(end)
-            return result
+            return result, dic["Directions"]
+
 
 def get_stop_list(route1, stop1Name, stop1Time, end1Name, end1Time, day1, route2 = None, stop2Name = None, stop2Time = None, end2Name = None, end2Time = None, day2 = None):
 
-    result = helper(route1, stop1Name, end1Name, stop1Time, end1Time, day1)
+    directionList = []
+    result, d1  = helper(route1, stop1Name, end1Name, stop1Time, end1Time, day1)
+    directionList.append(d1)
 
     if stop2Name != None:
-        result += helper(route2, stop2Name, end2Name, stop2Time, end2Time, day2)
+        r, d2 = helper(route2, stop2Name, end2Name, stop2Time, end2Time, day2)
+        result += r
+        directionList.append(d2)
 
     geoResult = []
     for stop in result:
-        print stop
-        geoResult += getBusStopGeoCode.getBusStopGeoCode(stop)
+        geoResult.append(getBusStopGeoCode.getBusStopGeoCode(stop))
 
-    return geoResult
+    return geoResult, directionList
 
-print get_stop_list("92", "Hasbrouck Apts.", "3:00PM", "Sage Hall", "3:16PM", "Saturday")
+# print get_stop_list("92", "Hasbrouck Apts.", "3:00PM", "Sage Hall", "3:16PM", "Saturday")

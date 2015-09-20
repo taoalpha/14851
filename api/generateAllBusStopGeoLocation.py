@@ -29,5 +29,3 @@ with open('datastops.txt') as f:
 
 with open('busStopLocations.json','w') as f:
     json.dump(locations, f)
-    
-
