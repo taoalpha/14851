@@ -120,6 +120,20 @@ this.options.updatePos = function(position) {
   });
 };
 
+this.options.drawMarkers= function(position,msg) {
+  var marker, myLatLng;
+  myLatLng = {};
+  myLatLng.lat = position.lat;
+  myLatLng.lng = position.lng;
+  return marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map,
+    title: msg
+  });
+};
+
+
+
 this.options.showError = function(e) {
   switch (e.code) {
     case e.PERMISSION_DENIED:
@@ -161,9 +175,13 @@ this.options.search = function() {
     return false;
   } else {
     $('div.loading').show();
+    var postdata = {}
+    postdata.start = this.startCoords.lat+","+this.startCoords.lng
+    postdata.end = this.endCoords.lat+","+this.endCoords.lng
     $.ajax({
-      url: "",
-      type: "GET",
+      url: "http://bigredtransit.co/route",
+      type: "POST",
+      data:postdata,
       dataType: "json"
     }).done(function(res) {
       window.options.parseData(res);
@@ -181,13 +199,35 @@ Parse data for using in drawing the route
  */
 
 this.options.parseData = function(data) {
-  return this.drawCoords = JSON.parse(data);
+  var alldata = JSON.parse(data);
+  if(alldata.length == 0){return alert("No results found, please try another search!")}
+  var templateHTML = "<div class='cards' data-index='__DATA_INDEX__' data-startCoords='__STARTCOORDS__' data-endCoords='__ENDCOORDS__'><span class='left'></span><div class='info'><h3>__ROUTE_NUMBER__</h3><span class='time'>__ROUTE_TIME__</span><span class='direction'>__ROUTE_DIRECTION__</span></div><span class='icon'></span><span class='right'></span></div>"
+  var renderHTML = ''
+  for(i in alldata){
+    for(j in alldata[i]['Routes']){
+      renderHTML += templateHTML.replace('__ROUTE_NUMBER__',alldata[i]['Routes'][j]).replace('__ROUTE_TIME__',alldata[i]['Time'][j]).replace('__ROUTE_DIRECTION__',alldata[i]['Direction']).replace('__STARTCOORDS__',this.startCoords.lat+","+this.startCoords.lng).replace('__ENDCOORDS__',this.endCoords.lat+","+this.endCoords.lng).replace('__DATA_INDEX__',j)
+    }
+  }
+  $('div#result_cards').html(renderHTML);
+  showMapData(0);
 };
 
-$('#gosearch').on('click', function(e) {
-  if (!window.options.search) {
+showMapData = function(ind){
 
-  }
+  var ele = $('div.cards').eq(ind);
+  var position = {}
+  var start = ele.attr("data-startCoords")
+  position.lat = start.split(",")[0]
+  position.lng = start.split(",")[1]
+  window.options.drawMarkers(position,"From")
+  var end = ele.attr("data-endCoords")
+  position.lat = end.split(",")[0]
+  position.lng = end.split(",")[1]
+  window.options.drawMarkers(position,"To")
+}
+
+$('#gosearch').on('click', function(e) {
+  window.options.search()
 });
 
 $('#backtohome').on('click', function(e) {
@@ -195,4 +235,22 @@ $('#backtohome').on('click', function(e) {
   e.stopPropagation();
   $('div#homepage').animate({top:"0"},"slow").show();
   $('div#searchresult').animate({top:"100%"},"slow").hide();
+})
+
+$('#searchresult').on("click","span.left",function(){
+  var ele = $(this).closest("div.cards");
+  if(ele.attr("data-index")=="0"){
+    return alert("Already the first one!")
+  }
+  ele.prev("div.cards").show();
+  showMapData(ele.attr("data-index"));
+});
+
+$('#searchresult').on("click","span.right",function(){
+  var ele = $(this).closest("div.cards");
+  if(!ele.next('div.cards')){
+    return alert("No more options!")
+  }
+  ele.hide();
+  showMapData(ele.attr("data-index"));
 })

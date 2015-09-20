@@ -58,15 +58,23 @@ def getRouteInfo(startBusStop, endBusStop):
             end2time = alltimes[3]
             day2 = datetime.datetime.today()
 
-        (route, directionList) = get_stop_list.get_stop_list(route1, stop1name, stop1time, end1name, end1time, day1, route2, stop2name, stop2time, end2name, end2time, day2)
-	print route
-        listsOfRoutes.append(route)
+        listsOfRoutes.append(route1)
         listOfStartTimes.append(stop1time)
         if len(alltimes) == 4:
             listOfEndTimes.append(end2time)
         else:
             listOfEndTimes.append(end1time)
         listOfRouteNums.append(allroutes)
+
+        #(route, directionList) = get_stop_list.get_stop_list(route1, stop1name, stop1time, end1name, end1time, day1, route2, stop2name, stop2time, end2name, end2time, day2)
+	#print route
+        #listsOfRoutes.append(route)
+        #listOfStartTimes.append(stop1time)
+        #if len(alltimes) == 4:
+        #    listOfEndTimes.append(end2time)
+        #else:
+        #    listOfEndTimes.append(end1time)
+        #listOfRouteNums.append(allroutes)
 
     return listsOfRoutes, listOfStartTimes, listOfEndTimes, listOfRouteNums, directionList
     # print "from:"+startDestination
@@ -135,4 +143,4 @@ def getFormData(start, end):
 #    allids[stopname] = stopid
 
 #print allids
-    soup = bs4.BeautifulSoup(html)
+    #soup = bs4.BeautifulSoup(html)
