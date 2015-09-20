@@ -1,3 +1,5 @@
+import sys
+sys.path.append('./')
 import requests
 import json
 import bs4
@@ -16,6 +18,7 @@ def getRouteInfo(startBusStop, endBusStop):
     soup = bs4.BeautifulSoup(html)
 
     allnames = soup.find_all('h4',class_="first")
+    print len(allnames)
     listsOfRoutes = []
     listOfStartTimes = []
     listOfEndTimes = []
@@ -90,6 +93,7 @@ def getDayRepNumber(day):
 def getFormData(start, end):
 
     startID = getStopId.getStopId(start)
+    print startID
     endId = getStopId.getStopId(end)
     day = getDayRepNumber(time.strftime("%a"))
     starthours = time.strftime("%I")

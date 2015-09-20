@@ -5,9 +5,12 @@ def get_info(startLocations, endLocations):
     bus_info = {}
     for startLocation in startLocations:
         for endLocation in endLocations:
-            key = startLocation + "|" + endLocation
+            key = startLocation["Name"] + "|" + endLocation["Name"]
             bus_info[key] = {}
-            routes, boardTimes, offTimes, routeNums, directionList =  tcatpost.getRouteInfo(startLocation, endLocation)
+
+            routes, boardTimes, offTimes, routeNums, directionList =  tcatpost.getRouteInfo(startLocation["Name"], endLocation["Name"])
+
+            print routes, boardTimes, offTimes, routeNums, directionList 
 
             bus_info[key]["RouteNums"] = routeNums
             bus_info[key]["Routes"] = routes
@@ -23,3 +26,5 @@ def get_info(startLocations, endLocations):
                     bus_info[key]["Time"].append(boardTimes[t] + " - " + offTimes[t])
 
     return bus_info
+
+#get_info("42.44444","-72.58888")
