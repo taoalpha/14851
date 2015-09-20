@@ -15,8 +15,9 @@ with open("stop-locations.json","r") as fl:
     dataset = json.load(fl)
 
 def getNearByBusStops(selfLocation, rangeInKm):
-    selfLat = selfLocation[0]
-    selfLong = selfLocation[1]
+    location = selfLocation.split(",")
+    selfLat = float(location[0])
+    selfLong = float(location[1])
     nearByLocations = []
 
     pt1 = geopy.Point(selfLat, selfLong)

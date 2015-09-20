@@ -23,6 +23,8 @@ def getRouteInfo(startBusStop, endBusStop):
     listOfStartTimes = []
     listOfEndTimes = []
     listOfRouteNums = []
+    directionList = []
+	
     for i in allnames:
         # option = i.get_text()
         # estimated = i.find_next("p").get_text()
@@ -56,7 +58,8 @@ def getRouteInfo(startBusStop, endBusStop):
             end2time = alltimes[3]
             day2 = datetime.datetime.today()
 
-        route, directionList = get_stop_list.get_stop_list(route1, stop1name, stop1time, end1name, end1time, day1, route2, stop2name, stop2time, end2name, end2time, day2)
+        (route, directionList) = get_stop_list.get_stop_list(route1, stop1name, stop1time, end1name, end1time, day1, route2, stop2name, stop2time, end2name, end2time, day2)
+	print route
         listsOfRoutes.append(route)
         listOfStartTimes.append(stop1time)
         if len(alltimes) == 4:
