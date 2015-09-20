@@ -168,8 +168,8 @@ this.options.search = function() {
     }).done(function(res) {
       window.options.parseData(res);
       $('div.loading').hide();
-      $('div#homepage').animate({top:"-100%"},"slow")
-      return $('div#searchresult').animate({top:"0"},"slow")
+      $('div#homepage').animate({top:"-100%"},"slow").hide()
+      return $('div#searchresult').animate({top:"0"},"slow").show()
     });
     return true;
   }
@@ -193,6 +193,6 @@ $('#gosearch').on('click', function(e) {
 $('#backtohome').on('click', function(e) {
   e.preventDefault();
   e.stopPropagation();
-  $('div#homepage').animate({top:"0"},"2000");
-  $('div#searchresult').animate({top:"100%"},"3000").hide();
+  $('div#homepage').animate({top:"0"},"slow").show();
+  $('div#searchresult').animate({top:"100%"},"slow").hide();
 })
