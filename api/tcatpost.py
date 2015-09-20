@@ -95,6 +95,7 @@ def getFormData(start, end):
     startID = getStopId.getStopId(start)
     print startID
     endId = getStopId.getStopId(end)
+
     day = getDayRepNumber(time.strftime("%a"))
     starthours = time.strftime("%I")
     startminutes = time.strftime("%M")

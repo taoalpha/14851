@@ -6,9 +6,9 @@ def getStopId(name):
     if len(busStopIdDictionary) == 0:
         loadBusStopIdDictionary()
     if name in busStopIdDictionary:
-	return busStopIdDictionary[name]
+        return busStopIdDictionary[name]
     else:
-    	return false
+        return 0
 
 
 def loadBusStopIdDictionary():
