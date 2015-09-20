@@ -76,7 +76,7 @@ def getRouteInfo(startBusStop, endBusStop):
         #    listOfEndTimes.append(end1time)
         #listOfRouteNums.append(allroutes)
 
-    return listsOfRoutes, listOfStartTimes, listOfEndTimes, listOfRouteNums, directionList
+    return listsOfRoutes, listOfStartTimes, listOfEndTimes, directionList
     # print "from:"+startDestination
     # print "to:"+endDestination
     # print "took route : " + route

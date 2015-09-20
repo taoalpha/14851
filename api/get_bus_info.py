@@ -8,9 +8,10 @@ def get_info(startLocations, endLocations):
             key = startLocation["Name"] + "|" + endLocation["Name"]
             bus_info[key] = {}
 
-            routes, boardTimes, offTimes, routeNums, directionList =  tcatpost.getRouteInfo(startLocation["Name"], endLocation["Name"])
+            routes, boardTimes, offTimes, directionList =  tcatpost.getRouteInfo(startLocation["Name"], endLocation["Name"])
 
             #bus_info[key]["RouteNums"] = routeNums
+            bus_info[key]["Key"] = key
             bus_info[key]["Routes"] = routes
 
             bus_info[key]["Time"] = []
@@ -24,7 +25,17 @@ def get_info(startLocations, endLocations):
                 else:
                     bus_info[key]["Time"].append(boardTimes[t] + " - " + offTimes[t])
 
+    result = []
+    for route, info in bus_info.iteritems():
+        if len(info["Routes"]) != 0:
+            result.append(info)
     #print bus_info
-    return bus_info
+    #print "bus_info"
+    #print bus_info
+    return result
 
-#get_info([{"Latitude": 42.4447409, "Name": "Carpenter Hall", "Longitude": -76.4841488}], [{"Latitude": 42.4365165, "Name": "East Hill Plaza", "Longitude": -76.46263259999999}])
+get_info([{"Latitude": 42.4447409, "Name": "Carpenter Hall", "Longitude": -76.4841488}, {
+    "Latitude": 42.4472546,
+    "Name": "Uris Hall",
+    "Longitude": -76.48225029999999
+  }], [{"Latitude": 42.4365165, "Name": "East Hill Plaza", "Longitude": -76.46263259999999}])
