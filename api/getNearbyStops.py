@@ -21,12 +21,20 @@ def getNearByBusStops(selfLocation, rangeInKm):
     nearByLocations = []
 
     pt1 = geopy.Point(selfLat, selfLong)
-
+    a = None, 0;
+    b = None, 0;
+    c = None, 0;
     for location in dataset:
-
         pt2 = geopy.Point(location["Latitude"], location["Longitude"])
         dist = geopy.distance.distance(pt1, pt2).km
         if(dist < rangeInKm):
-            nearByLocations.append(location)
+            furthest = max(max(a[1],b[1]),c[1]) 
 
-    return nearByLocations
+            if(dist < furthest):
+                c = location, dist
+                array = [a, b ,c]
+                array.sort(key=lambda x: x[1])
+                a = array[0]
+                b = array[1]
+                c = array[2]
+    return [a,b,c]
