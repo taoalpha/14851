@@ -3,7 +3,7 @@ import time
 import getBusStopGeoCode
 import os
 
-# os.chdir("/var/www/bigredtransit/templates/api")
+os.chdir("/var/www/bigredtransit/templates/api")
 
 routeStopMap = {}
 with open('stop_lists_with_time.json', 'r') as sl:

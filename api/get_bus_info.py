@@ -5,12 +5,13 @@ def get_info(startLocations, endLocations):
     bus_info = {}
     for startLocation in startLocations:
         for endLocation in endLocations:
-            key = startLocation["Name"] + "|" + endLocation["Name"]
+            key = startLocation[0]["Name"] + "|" + endLocation[0]["Name"]
             bus_info[key] = {}
 
-            routes, boardTimes, offTimes, routeNums, directionList =  tcatpost.getRouteInfo(startLocation["Name"], endLocation["Name"])
+            routes, boardTimes, offTimes, directionList =  tcatpost.getRouteInfo(startLocation[0]["Name"], endLocation[0]["Name"])
 
             #bus_info[key]["RouteNums"] = routeNums
+            bus_info[key]["Key"] = key
             bus_info[key]["Routes"] = routes
 
             bus_info[key]["Time"] = []
@@ -24,7 +25,23 @@ def get_info(startLocations, endLocations):
                 else:
                     bus_info[key]["Time"].append(boardTimes[t] + " - " + offTimes[t])
 
-    #print bus_info
-    return bus_info
+    myDic = {}
+    for route, info in bus_info.iteritems():
+        if len(info["Routes"]) != 0:
+            if not "Routes" in myDic:
+                myDic["Routes:"] = info["Routes"]
+            else:
+                myDic["Routes:"] += info["Routes"]
+            if not "Direction" in myDic:
+                myDic["Direction"] = info["Direction"]
+            else:
+                myDic["Direction"] += info["Direction"]
+            if not "Time" in myDic:
+                myDic["Time"] = info["Time"]
+            else:
+                myDic["Time"] += info["Time"]
 
-#get_info([{"Latitude": 42.4447409, "Name": "Carpenter Hall", "Longitude": -76.4841488}], [{"Latitude": 42.4365165, "Name": "East Hill Plaza", "Longitude": -76.46263259999999}])
+    #print bus_info
+    #print "bus_info"
+    #print bus_info
+    return myDic
